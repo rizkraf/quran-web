@@ -11,8 +11,8 @@ const props = defineProps({
 
 <template>
   <RouterLink
-    to="/"
-    class="w-full bg-white p-4 flex gap-3 items-center shadow-md rounded-lg shadow-gray-200/50"
+    :to="{ name: 'surah', params: { id: surah.number } }"
+    class="box-border w-full bg-white p-4 flex gap-3 items-center shadow-md rounded-lg shadow-gray-200/50"
     v-for="surah in props.surahs"
     :key="surah.number"
   >
@@ -45,6 +45,11 @@ const props = defineProps({
       <p class="text-gray-400 text-sm">
         {{ surah.revelation.id }},
         <span>{{ surah.numberOfVerses }} ayat</span>
+      </p>
+    </div>
+    <div class="ml-auto">
+      <p class="font-arabic text-2xl text-emerald-600">
+        {{ surah.name.short }}
       </p>
     </div>
   </RouterLink>
