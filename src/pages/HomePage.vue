@@ -2,13 +2,16 @@
 import axios from "axios";
 import { onMounted, ref, computed } from "vue";
 import SurahListsCard from "../components/SurahListsCard.vue";
+import SurahListsSkeleton from "../components/SurahListsSkeleton.vue";
 
 const surahs = ref([]);
 const search = ref("");
+const loading = ref(true);
 
 const fetchSurah = async () => {
   const response = await axios.get("https://quran-api-clone.vercel.app/surah");
   surahs.value = response.data.data;
+  loading.value = false;
 };
 
 const searchedSurah = computed(() => {
@@ -43,7 +46,7 @@ onMounted(() => {
         v-model.lazy="search"
       />
       <svg
-        class="absolute top-0 right-0 mr-3 mt-2 text-emerald-800"
+        class="absolute top-0 right-0 mr-3 mt-2 text-emerald-600"
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
         y="0px"
@@ -59,7 +62,10 @@ onMounted(() => {
       </svg>
     </div>
     <div class="flex flex-col gap-5">
-      <SurahListsCard :surahs="searchedSurah" />
+      <div v-if="loading" class="flex flex-col gap-5">
+        <SurahListsSkeleton v-for="n in 5" :key="n" />
+      </div>
+      <SurahListsCard :surahs="searchedSurah" v-else />
     </div>
   </main>
 </template>
