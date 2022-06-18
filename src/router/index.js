@@ -26,4 +26,12 @@ const router = createRouter({
   ],
 });
 
+router.afterEach((to) => {
+  if (to.name === "surah") {
+    localStorage.setItem("lastReadSurah", to.params.id);
+  } else {
+    window.scrollTo(0, 0);
+  }
+});
+
 export default router;
