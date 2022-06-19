@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import HomePage from "../pages/HomePage.vue";
 import SurahPage from "../pages/SurahPage.vue";
+import BookmarkPage from "../pages/BookmarkPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
           path: "/surah/:id",
           name: "surah",
           component: SurahPage,
+        },
+        {
+          path: "/bookmark",
+          name: "bookmark",
+          component: BookmarkPage,
         },
       ],
     },

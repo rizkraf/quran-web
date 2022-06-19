@@ -6,11 +6,15 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  opacity: {
+    type: Number,
+    required: true,
+  },
 });
 
 const bookmarks = ref([]);
 
-const addRemoveBookmark = (number, index) => {
+const addRemoveBookmark = (data, number, index) => {
   if (
     bookmarks.value.find(
       (bookmark) => bookmark.number === number && bookmark.index === index
@@ -21,6 +25,7 @@ const addRemoveBookmark = (number, index) => {
     );
   } else {
     bookmarks.value.push({
+      data,
       number,
       index,
     });
@@ -36,6 +41,7 @@ const saveToLocalStorage = () => {
 onMounted(() => {
   const items = localStorage.getItem("bookmarks");
   bookmarks.value = items ? JSON.parse(items) : [];
+  console.log(props.surahs);
 });
 </script>
 
@@ -44,11 +50,12 @@ onMounted(() => {
     class="box-border w-full bg-white p-4 shadow-md rounded-lg shadow-gray-200/50"
     v-for="(verse, index) in props.surahs.verses"
     :key="index"
-    :id="`verse-${index}`"
+    :id="`verse-${index + 1}`"
   >
     <div class="flex justify-between w-full items-center mb-5">
       <svg
-        class="text-emerald-600"
+        class="text-emerald-600 transition duration-300"
+        :style="{ opacity: opacity }"
         width="37"
         height="36"
         viewBox="0 0 37 36"
@@ -74,8 +81,9 @@ onMounted(() => {
         </text>
       </svg>
       <div class="flex items-center gap-4">
-        <button>
+        <button class="transition duration-300" :style="{ opacity: opacity }">
           <svg
+            class="text-emerald-600 h-7 w-7"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="24"
@@ -83,19 +91,27 @@ onMounted(() => {
           >
             <path fill="none" d="M0 0h24v24H0z" />
             <path
+              fill="currentColor"
               d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM10.622 8.415l4.879 3.252a.4.4 0 0 1 0 .666l-4.88 3.252a.4.4 0 0 1-.621-.332V8.747a.4.4 0 0 1 .622-.332z"
             />
           </svg>
         </button>
-        <button @click="addRemoveBookmark(surahs.number, `${index}`)">
+        <button
+          @click="
+            addRemoveBookmark(surahs, surahs.number, `verse-${index + 1}`)
+          "
+          class="transition duration-300"
+          :style="{ opacity: opacity }"
+        >
           <svg
             v-if="
               bookmarks.find(
                 (bookmark) =>
                   bookmark.number === surahs.number &&
-                  bookmark.index === `${index}`
+                  bookmark.index === `verse-${index + 1}`
               )
             "
+            class="text-emerald-600 h-7 w-7"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="24"
@@ -104,9 +120,11 @@ onMounted(() => {
             <path fill="none" d="M0 0h24v24H0z" />
             <path
               d="M5 2h14a1 1 0 0 1 1 1v19.143a.5.5 0 0 1-.766.424L12 18.03l-7.234 4.536A.5.5 0 0 1 4 22.143V3a1 1 0 0 1 1-1z"
+              fill="currentColor"
             />
           </svg>
           <svg
+            class="text-emerald-600 h-7 w-7"
             v-else
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -115,6 +133,7 @@ onMounted(() => {
           >
             <path fill="none" d="M0 0h24v24H0z" />
             <path
+              fill="currentColor"
               d="M5 2h14a1 1 0 0 1 1 1v19.143a.5.5 0 0 1-.766.424L12 18.03l-7.234 4.536A.5.5 0 0 1 4 22.143V3a1 1 0 0 1 1-1zm13 2H6v15.432l6-3.761 6 3.761V4z"
             />
           </svg>
@@ -122,10 +141,16 @@ onMounted(() => {
       </div>
     </div>
     <h3
-      class="font-arabic text-2xl leading-[2.5] text-slate-900 text-right mb-5"
+      class="font-arabic text-2xl leading-[2.5] text-slate-900 text-right mb-5 transition duration-300"
+      :style="{ opacity: opacity }"
     >
       {{ verse.text.arab }}
     </h3>
-    <p class="text-lg text-slate-900">{{ verse.translation.id }}</p>
+    <p
+      class="text-lg text-slate-900 transition duration-300"
+      :style="{ opacity: opacity }"
+    >
+      {{ verse.translation.id }}
+    </p>
   </div>
 </template>

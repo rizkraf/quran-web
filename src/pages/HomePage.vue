@@ -46,6 +46,21 @@ onMounted(() => {
 <template>
   <header class="flex justify-between items-center mb-5">
     <h1 class="text-xl font-bold text-emerald-800">Quran Web</h1>
+    <RouterLink to="/bookmark">
+      <svg
+        class="text-emerald-800 h-7 w-7"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path fill="none" d="M0 0h24v24H0z" />
+        <path
+          fill="currentColor"
+          d="M5 2h14a1 1 0 0 1 1 1v19.143a.5.5 0 0 1-.766.424L12 18.03l-7.234 4.536A.5.5 0 0 1 4 22.143V3a1 1 0 0 1 1-1z"
+        />
+      </svg>
+    </RouterLink>
   </header>
   <main>
     <div
@@ -54,19 +69,17 @@ onMounted(() => {
       <p class="font-medium mb-16 flex items-center gap-2">
         <span
           ><svg
+            class="text-white"
             xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
             width="24"
             height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-book-open h-5 w-5"
           >
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path
+              d="M13 21v2h-2v-2H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6a3.99 3.99 0 0 1 3 1.354A3.99 3.99 0 0 1 15 3h6a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8zm7-2V5h-5a2 2 0 0 0-2 2v12h7zm-9 0V7a2 2 0 0 0-2-2H4v14h7z"
+              fill="currentColor"
+            />
           </svg>
         </span>
         Last Read
@@ -112,17 +125,15 @@ onMounted(() => {
       <svg
         class="absolute top-0 right-0 mr-3 mt-2 text-emerald-600"
         xmlns="http://www.w3.org/2000/svg"
-        x="0px"
-        y="0px"
+        viewBox="0 0 24 24"
         width="24"
         height="24"
-        viewBox="0 0 24 24"
-        style="fill: #undefined"
       >
+        <path fill="none" d="M0 0h24v24H0z" />
         <path
           fill="currentColor"
-          d="M 9 2 C 5.1458514 2 2 5.1458514 2 9 C 2 12.854149 5.1458514 16 9 16 C 10.747998 16 12.345009 15.348024 13.574219 14.28125 L 14 14.707031 L 14 16 L 20 22 L 22 20 L 16 14 L 14.707031 14 L 14.28125 13.574219 C 15.348024 12.345009 16 10.747998 16 9 C 16 5.1458514 12.854149 2 9 2 z M 9 4 C 11.773268 4 14 6.2267316 14 9 C 14 11.773268 11.773268 14 9 14 C 6.2267316 14 4 11.773268 4 9 C 4 6.2267316 6.2267316 4 9 4 z"
-        ></path>
+          d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"
+        />
       </svg>
     </div>
     <div class="flex flex-col gap-5">
