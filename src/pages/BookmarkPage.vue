@@ -30,6 +30,7 @@ const saveToLocalStorage = () => {
 onMounted(() => {
   const items = localStorage.getItem("bookmarks");
   bookmarks.value = items ? JSON.parse(items) : [];
+  document.title = `Bookmark - Quran Web`;
 });
 </script>
 

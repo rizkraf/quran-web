@@ -40,6 +40,7 @@ const fadeIn = () => {
 onMounted(() => {
   fetchSurah();
   fadeIn();
+  document.title = `Home - Quran Web`;
 });
 </script>
 

@@ -19,6 +19,7 @@ const fetchSurah = async () => {
       let { data } = response.data;
       surahs.value = data;
       loading.value = false;
+      document.title = `${surahs.value.name.transliteration.id} - Quran Web`;
     }, 1000);
   } catch (error) {
     console.log(error);
