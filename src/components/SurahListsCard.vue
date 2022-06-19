@@ -4,6 +4,10 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  opacity: {
+    type: Number,
+    required: true,
+  },
 });
 </script>
 
@@ -15,7 +19,8 @@ const props = defineProps({
     :key="surah.number"
   >
     <svg
-      class="text-emerald-600"
+      class="text-emerald-600 transition duration-[500ms]"
+      :style="{ opacity: opacity }"
       width="37"
       height="36"
       viewBox="0 0 37 36"
@@ -37,16 +42,25 @@ const props = defineProps({
       </text>
     </svg>
     <div>
-      <h3 class="font-semibold text-emerald-800 mb-0.5">
+      <h3
+        class="font-semibold text-emerald-800 mb-0.5 transition duration-[500ms]"
+        :style="{ opacity: opacity }"
+      >
         {{ surah.name.transliteration.id }}
       </h3>
-      <p class="text-gray-400 text-sm">
+      <p
+        class="text-gray-400 text-sm transition duration-[500ms]"
+        :style="{ opacity: opacity }"
+      >
         {{ surah.revelation.id }},
         <span>{{ surah.numberOfVerses }} ayat</span>
       </p>
     </div>
     <div class="ml-auto">
-      <p class="font-arabic text-2xl text-emerald-600">
+      <p
+        class="font-arabic text-2xl text-emerald-600 transition duration-[500ms]"
+        :style="{ opacity: opacity }"
+      >
         {{ surah.name.short }}
       </p>
     </div>

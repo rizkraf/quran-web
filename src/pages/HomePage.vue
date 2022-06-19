@@ -8,6 +8,7 @@ const surahs = ref([]);
 const search = ref("");
 const loading = ref(true);
 const lastRead = ref(localStorage.getItem("lastReadSurah") || "");
+const opacity = ref(0);
 
 const fetchSurah = async () => {
   const response = await axios.get("https://quran-api-clone.vercel.app/surah");
@@ -30,8 +31,15 @@ const searchedSurah = computed(() => {
   });
 });
 
+const fadeIn = () => {
+  setTimeout(() => {
+    opacity.value = 1;
+  }, 2000);
+};
+
 onMounted(() => {
   fetchSurah();
+  fadeIn();
 });
 </script>
 
@@ -70,7 +78,8 @@ onMounted(() => {
       <RouterLink
         :to="`/surah/${lastRead}`"
         v-else
-        class="font-semibold inline-block"
+        class="font-semibold inline-block transition duration-[500ms]"
+        :style="{ opacity: opacity }"
         >{{
           surahs[lastRead - 1]
             ? surahs[lastRead - 1].name.transliteration.id
@@ -120,7 +129,7 @@ onMounted(() => {
       <div v-if="loading" class="flex flex-col gap-5">
         <SurahListsSkeleton v-for="n in 5" :key="n" />
       </div>
-      <SurahListsCard :surahs="searchedSurah" v-else />
+      <SurahListsCard :surahs="searchedSurah" :opacity="opacity" v-else />
     </div>
   </main>
 </template>
