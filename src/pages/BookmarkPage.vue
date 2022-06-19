@@ -54,7 +54,7 @@ onMounted(() => {
   </header>
   <div class="flex flex-col gap-5">
     <div
-      v-for="(bookmark, index) in bookmarks"
+      v-for="bookmark in bookmarks"
       :key="bookmark.number"
       class="box-border w-full bg-white p-4 shadow-md rounded-lg shadow-gray-200/50"
     >
@@ -83,7 +83,7 @@ onMounted(() => {
               text-anchor="middle"
               fill="#ffffff"
             >
-              {{ bookmark.data.numberOfVerses }}
+              {{ bookmark.number }}
             </text>
           </svg>
           <p class="font-semibold text-emerald-600">
@@ -109,7 +109,11 @@ onMounted(() => {
           </button>
           <button
             @click="
-              addRemoveBookmark(bookmark.data, bookmark.data.number, `${index}`)
+              addRemoveBookmark(
+                bookmark.data,
+                bookmark.number,
+                `${bookmark.data.name.transliteration.id}-${bookmark.number}`
+              )
             "
           >
             <svg
@@ -117,7 +121,8 @@ onMounted(() => {
                 bookmarks.find(
                   (bookmark) =>
                     bookmark.number === bookmark.number &&
-                    bookmark.index === bookmark.index
+                    bookmark.index ===
+                      `${bookmark.data.name.transliteration.id}-${bookmark.number}`
                 )
               "
               class="text-emerald-600 h-7 w-7"

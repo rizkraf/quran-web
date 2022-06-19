@@ -41,7 +41,6 @@ const saveToLocalStorage = () => {
 onMounted(() => {
   const items = localStorage.getItem("bookmarks");
   bookmarks.value = items ? JSON.parse(items) : [];
-  console.log(props.surahs);
 });
 </script>
 
@@ -98,7 +97,11 @@ onMounted(() => {
         </button>
         <button
           @click="
-            addRemoveBookmark(surahs, surahs.number, `verse-${index + 1}`)
+            addRemoveBookmark(
+              surahs,
+              verse.number.inSurah,
+              `${surahs.name.transliteration.id}-${index + 1}`
+            )
           "
           class="transition duration-300"
           :style="{ opacity: opacity }"
@@ -107,8 +110,9 @@ onMounted(() => {
             v-if="
               bookmarks.find(
                 (bookmark) =>
-                  bookmark.number === surahs.number &&
-                  bookmark.index === `verse-${index + 1}`
+                  bookmark.number === verse.number.inSurah &&
+                  bookmark.index ===
+                    `${surahs.name.transliteration.id}-${index + 1}`
               )
             "
             class="text-emerald-600 h-7 w-7"
