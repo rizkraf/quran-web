@@ -16,9 +16,8 @@
         >Repositori Github</a
       >
     </div>
-    <div class="flex gap-2">
+    <div class="flex flex-col justify-center items-center md:flex-row md:gap-2">
       <h4>© 2022 Rizky Rafi Azhara</h4>
-      <span>-</span>
       <h4>
         Inspirasi desain dari
         <a
