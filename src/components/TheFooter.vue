@@ -17,7 +17,7 @@
       >
     </div>
     <div class="flex gap-2">
-      <h4>© Rizky Rafi Azhara</h4>
+      <h4>© 2022 Rizky Rafi Azhara</h4>
       <span>-</span>
       <h4>
         Inspirasi desain dari
