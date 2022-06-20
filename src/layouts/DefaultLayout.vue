@@ -1,5 +1,11 @@
+<script setup>
+import TheContainer from "../components/TheContainer.vue";
+import TheFooter from "../components/TheFooter.vue";
+</script>
+
 <template>
-  <div class="font-primary p-6 max-w-3xl mx-auto bg-[#f7f7f7]">
+  <TheContainer>
     <RouterView />
-  </div>
+  </TheContainer>
+  <TheFooter />
 </template>
