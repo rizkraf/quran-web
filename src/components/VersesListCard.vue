@@ -13,6 +13,9 @@ const props = defineProps({
 });
 
 const bookmarks = ref([]);
+const audioPlayer = ref(null);
+const isPlayed = ref(null);
+const isPlaying = ref(false);
 
 const addRemoveBookmark = (data, number, index) => {
   if (
@@ -30,12 +33,28 @@ const addRemoveBookmark = (data, number, index) => {
       index,
     });
   }
-  console.log(bookmarks.value);
   saveToLocalStorage();
 };
 
 const saveToLocalStorage = () => {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks.value));
+};
+
+const playAudio = (index) => {
+  audioPlayer.value[index].addEventListener("ended", () => {
+    isPlayed.value = null;
+    isPlaying.value = false;
+  });
+
+  audioPlayer.value[index].play();
+  isPlayed.value = index;
+  isPlaying.value = true;
+};
+
+const pauseAudio = (index) => {
+  audioPlayer.value[index].pause();
+  isPlayed.value = null;
+  isPlaying.value = false;
 };
 
 onMounted(() => {
@@ -80,9 +99,33 @@ onMounted(() => {
         </text>
       </svg>
       <div class="flex items-center gap-4">
-        <button class="transition duration-300" :style="{ opacity: opacity }">
+        <audio :src="verse.audio.primary" ref="audioPlayer"></audio>
+        <button
+          @click.prevent="
+            isPlayed == index && isPlaying
+              ? pauseAudio(index)
+              : playAudio(index)
+          "
+          class="transition duration-300"
+          :style="{ opacity: opacity }"
+        >
           <svg
-            class="text-emerald-600 h-7 w-7"
+            v-if="isPlayed == index && isPlaying"
+            class="text-emerald-600 h-8 w-8"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path
+              fill="currentColor"
+              d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM9 9h2v6H9V9zm4 0h2v6h-2V9z"
+            />
+          </svg>
+          <svg
+            v-else
+            class="text-emerald-600 h-8 w-8"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="24"
@@ -115,7 +158,7 @@ onMounted(() => {
                     `${surahs.name.transliteration.id}-${index + 1}`
               )
             "
-            class="text-emerald-600 h-7 w-7"
+            class="text-emerald-600 h-8 w-8"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="24"
@@ -128,7 +171,7 @@ onMounted(() => {
             />
           </svg>
           <svg
-            class="text-emerald-600 h-7 w-7"
+            class="text-emerald-600 h-8 w-8"
             v-else
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
