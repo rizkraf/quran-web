@@ -1,35 +1,34 @@
-# quran-web
+<h1 id="title" align="center">Quran-Web</h1>
 
-This template should help get you started developing with Vue 3 in Vite.
+<p id="description">Al-Quran Website that created using Vue.js and Tailwind CSS</p>
 
-## Recommended IDE Setup
+<h2>🚀 Demo</h2>
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[https://alquran-web-app.vercel.app/](https://alquran-web-app.vercel.app/)
 
-## Customize configuration
+<h2>Project Screenshots:</h2>
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+<img src="https://iili.io/hPqD9R.md.png" alt="project-screenshot" width="400" height="400/">
 
-## Project Setup
+<img src="https://iili.io/hPqbup.md.png" alt="project-screenshot" width="400" height="400/">
 
-```sh
-npm install
-```
+<img src="https://iili.io/hPqZ8v.md.png" alt="project-screenshot" width="400" height="400/">
 
-### Compile and Hot-Reload for Development
+<h2>🧐 Features</h2>
 
-```sh
-npm run dev
-```
+Here're some of the project's best features:
 
-### Compile and Minify for Production
+*   Surah Search
+*   Last Read Mark
+*   Bookmarks Surah
+*   Audio in each verses
 
-```sh
-npm run build
-```
+<h2>💻 Built with</h2>
 
-### Lint with [ESLint](https://eslint.org/)
+Technologies used in the project:
 
-```sh
-npm run lint
-```
+*   [Vue.js 3](https://vuejs.org/)
+*   [Tailwind CSS 3](https://tailwindcss.com/)
+*   [Vite](https://vitejs.dev/)
+*   [Axios](https://axios-http.com/)
+*   [Quran API](https://github.com/gadingnst/quran-api)
