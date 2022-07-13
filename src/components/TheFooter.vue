@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="p-6 max-w-3xl mx-auto bg-gradient-to-br from-green-800 to-emerald-600 text-white flex flex-col items-center justify-center"
+    class="absolute w-full bottom-0 p-6 max-w-3xl mx-auto bg-gradient-to-br from-green-800 to-emerald-600 text-white flex flex-col items-center justify-center"
   >
     <div class="flex items-center gap-5">
       <a
