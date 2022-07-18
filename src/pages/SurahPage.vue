@@ -1,9 +1,10 @@
 <script setup>
 import axios from "axios";
-import { ref, reactive, computed, onMounted } from "vue";
+import { ref, reactive, computed, onMounted, shallowRef } from "vue";
 import { useRoute } from "vue-router";
 import { useHead } from "@vueuse/head";
 import VersesListCard from "../components/VersesListCard.vue";
+import TafsirListCard from "../components/TafsirListCard.vue";
 import VersesListSkeleton from "../components/VersesListSkeleton.vue";
 
 const route = useRoute();
@@ -15,6 +16,8 @@ const siteHead = reactive({
   author: "Rizky Rafi Azhara",
   description: "Website untuk membaca Al-Quran",
 });
+const tabs = shallowRef([VersesListCard, TafsirListCard]);
+const currentTab = shallowRef(VersesListCard);
 
 useHead({
   title: computed(() => siteHead.title),
@@ -126,11 +129,29 @@ onMounted(() => {
         {{ surahs.numberOfVerses }} Ayat
       </p>
     </div>
+    <div
+      class="bg-white flex items-center w-full shadow-md rounded-lg shadow-gray-200/50 mb-6"
+    >
+      <button
+        @click="currentTab = tab"
+        v-for="tab in tabs"
+        :key="tab"
+        class="inline-block rounded-lg basis-1/2 py-2.5"
+        :class="{
+          'bg-gradient-to-br from-green-800 to-emerald-600 text-white':
+            currentTab === tab,
+        }"
+      >
+        {{ tab.__name === "VersesListCard" ? "Surah" : "Tafsir" }}
+      </button>
+    </div>
     <div class="flex flex-col gap-5">
       <div v-if="loading" class="flex flex-col gap-5">
         <VersesListSkeleton v-for="n in 5" :key="n" />
       </div>
-      <VersesListCard :surahs="surahs" :opacity="opacity" />
+      <keep-alive>
+        <component :is="currentTab" :surahs="surahs" :opacity="opacity" />
+      </keep-alive>
     </div>
   </main>
 </template>
