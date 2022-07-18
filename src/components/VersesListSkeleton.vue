@@ -6,9 +6,9 @@
       <div class="h-9 w-9 bg-slate-200 dark:bg-emerald-900 rounded-full"></div>
       <div class="flex items-center gap-4">
         <div
-          class="h-6 w-6 bg-slate-200 dark:bg-emerald-900 rounded-full"
+          class="h-8 w-8 bg-slate-200 dark:bg-emerald-900 rounded-full"
         ></div>
-        <div class="h-6 w-6 bg-slate-200 dark:bg-emerald-900 rounded-sm"></div>
+        <div class="h-8 w-8 bg-slate-200 dark:bg-emerald-900 rounded-sm"></div>
       </div>
     </div>
     <div
