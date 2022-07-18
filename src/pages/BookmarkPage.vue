@@ -1,10 +1,30 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, reactive, computed, onMounted } from "vue";
+import { useHead } from "@vueuse/head";
 
 const bookmarks = ref([]);
 const audioPlayer = ref(null);
 const isPlayed = ref(null);
 const isPlaying = ref(false);
+const siteHead = reactive({
+  title: "Bookmark - Quran Web",
+  author: "Rizky Rafi Azhara",
+  description: "Website untuk membaca Al-Quran",
+});
+
+useHead({
+  title: computed(() => siteHead.title),
+  meta: [
+    {
+      name: "author",
+      content: computed(() => siteHead.author),
+    },
+    {
+      name: "description",
+      content: computed(() => siteHead.description),
+    },
+  ],
+});
 
 const addRemoveBookmark = (data, number, index) => {
   if (
@@ -49,7 +69,6 @@ const pauseAudio = (index) => {
 onMounted(() => {
   const items = localStorage.getItem("bookmarks");
   bookmarks.value = items ? JSON.parse(items) : [];
-  document.title = `Bookmark - Quran Web`;
 });
 </script>
 

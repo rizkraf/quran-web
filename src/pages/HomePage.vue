@@ -1,6 +1,7 @@
 <script setup>
 import axios from "axios";
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, reactive } from "vue";
+import { useHead } from "@vueuse/head";
 import SurahListsCard from "../components/SurahListsCard.vue";
 import SurahListsSkeleton from "../components/SurahListsSkeleton.vue";
 
@@ -9,6 +10,25 @@ const search = ref("");
 const loading = ref(true);
 const lastRead = ref(localStorage.getItem("lastReadSurah") || "");
 const opacity = ref(0);
+const siteHead = reactive({
+  title: "Beranda - Quran Web",
+  author: "Rizky Rafi Azhara",
+  description: "Website untuk membaca Al-Quran",
+});
+
+useHead({
+  title: computed(() => siteHead.title),
+  meta: [
+    {
+      name: "author",
+      content: computed(() => siteHead.author),
+    },
+    {
+      name: "description",
+      content: computed(() => siteHead.description),
+    },
+  ],
+});
 
 const fetchSurah = async () => {
   const response = await axios.get("https://quran-api-clone.vercel.app/surah");
@@ -40,7 +60,6 @@ const fadeIn = () => {
 onMounted(() => {
   fetchSurah();
   fadeIn();
-  document.title = `Home - Quran Web`;
 });
 </script>
 
@@ -83,7 +102,7 @@ onMounted(() => {
             />
           </svg>
         </span>
-        Last Read
+        Terakhir Dibaca
       </p>
       <div
         v-if="loading"

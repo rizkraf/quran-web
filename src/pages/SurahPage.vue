@@ -1,7 +1,8 @@
 <script setup>
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, reactive, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useHead } from "@vueuse/head";
 import VersesListCard from "../components/VersesListCard.vue";
 import VersesListSkeleton from "../components/VersesListSkeleton.vue";
 
@@ -9,6 +10,25 @@ const route = useRoute();
 const surahs = ref([]);
 const loading = ref(true);
 const opacity = ref(0);
+const siteHead = reactive({
+  title: "Beranda - Quran Web",
+  author: "Rizky Rafi Azhara",
+  description: "Website untuk membaca Al-Quran",
+});
+
+useHead({
+  title: computed(() => siteHead.title),
+  meta: [
+    {
+      name: "author",
+      content: computed(() => siteHead.author),
+    },
+    {
+      name: "description",
+      content: computed(() => siteHead.description),
+    },
+  ],
+});
 
 const fetchSurah = async () => {
   const response = await axios.get(
@@ -19,7 +39,7 @@ const fetchSurah = async () => {
       let { data } = response.data;
       surahs.value = data;
       loading.value = false;
-      document.title = `${surahs.value.name.transliteration.id} - Quran Web`;
+      siteHead.title = `${surahs.value.name.transliteration.id} - Quran Web`;
     }, 1000);
   } catch (error) {
     console.log(error);
