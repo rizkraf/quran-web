@@ -77,7 +77,7 @@ onMounted(() => {
     <header class="flex items-center mb-5">
       <RouterLink to="/" class="inline-block">
         <svg
-          class="text-emerald-700 h-7 w-7"
+          class="text-emerald-700 dark:text-emerald-600 h-7 w-7"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           width="24"
@@ -90,14 +90,20 @@ onMounted(() => {
           />
         </svg>
       </RouterLink>
-      <h3 class="text-emerald-700 text-xl font-bold ml-auto">Bookmark</h3>
+      <h3
+        class="text-emerald-700 dark:text-emerald-600 text-xl font-bold ml-auto"
+      >
+        Bookmark
+      </h3>
     </header>
     <div class="flex flex-col gap-5">
       <div
         v-if="bookmarks.length == 0"
-        class="box-border w-full bg-white px-4 py-20 shadow-md rounded-lg shadow-gray-200/50"
+        class="box-border w-full bg-white dark:bg-[#05291d] dark:shadow-none px-4 py-20 shadow-md rounded-lg shadow-gray-200/50"
       >
-        <h1 class="text-3xl font-bold text-center text-emerald-700">
+        <h1
+          class="text-3xl font-bold text-center text-emerald-700 dark:text-white"
+        >
           Bookmark masih kosong
         </h1>
       </div>
@@ -105,7 +111,7 @@ onMounted(() => {
         v-else
         v-for="(bookmark, index) in bookmarks"
         :key="bookmark.number"
-        class="box-border w-full bg-white p-4 shadow-md rounded-lg shadow-gray-200/50"
+        class="box-border w-full bg-white p-4 shadow-md rounded-lg shadow-gray-200/50 dark:bg-[#05291d] dark:shadow-none"
       >
         <div class="flex justify-between w-full items-center mb-5">
           <div class="flex items-center gap-2">
@@ -247,11 +253,11 @@ onMounted(() => {
           </div>
         </div>
         <h3
-          class="font-arabic text-2xl leading-[2.5] text-slate-900 text-right mb-5 transition duration-300"
+          class="font-arabic text-2xl leading-[2.5] text-slate-900 dark:text-white text-right mb-5 transition duration-300"
         >
           {{ bookmark.data.verses[bookmark.number - 1].text.arab }}
         </h3>
-        <p class="text-lg text-slate-900">
+        <p class="text-lg text-slate-900 dark:text-white">
           {{ bookmark.data.verses[bookmark.number - 1].translation.id }}
         </p>
       </div>

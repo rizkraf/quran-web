@@ -3,6 +3,7 @@ import axios from "axios";
 import { ref, reactive, computed, onMounted, shallowRef } from "vue";
 import { useRoute } from "vue-router";
 import { useHead } from "@vueuse/head";
+import { useDark } from "@vueuse/core";
 import VersesListCard from "../components/VersesListCard.vue";
 import TafsirListCard from "../components/TafsirListCard.vue";
 import VersesListSkeleton from "../components/VersesListSkeleton.vue";
@@ -18,6 +19,7 @@ const siteHead = reactive({
 });
 const tabs = shallowRef([VersesListCard, TafsirListCard]);
 const currentTab = shallowRef(VersesListCard);
+const isDark = useDark();
 
 useHead({
   title: computed(() => siteHead.title),
@@ -58,6 +60,7 @@ const fadeIn = () => {
 onMounted(() => {
   fetchSurah();
   fadeIn();
+  isDark.value;
 });
 </script>
 
@@ -80,7 +83,7 @@ onMounted(() => {
     </RouterLink>
     <div
       v-if="loading"
-      class="h-7 w-28 bg-slate-300 animate-pulse rounded-sm"
+      class="h-7 w-28 bg-slate-300 dark:bg-[#05291d] animate-pulse rounded-sm"
     ></div>
     <h1
       v-else
@@ -92,7 +95,7 @@ onMounted(() => {
   </header>
   <main>
     <div
-      class="box-border bg-gradient-to-br from-green-800 to-emerald-600 text-white p-6 w-full mb-6 rounded-lg shadow-lg shadow-emerald-200/50"
+      class="box-border bg-gradient-to-br from-green-800 to-emerald-600 text-white p-6 w-full mb-6 rounded-lg shadow-lg shadow-emerald-200/50 dark:shadow-none"
     >
       <div
         v-if="loading"
@@ -130,7 +133,7 @@ onMounted(() => {
       </p>
     </div>
     <div
-      class="bg-white flex items-center w-full shadow-md rounded-lg shadow-gray-200/50 mb-6"
+      class="bg-white dark:bg-[#05291d] dark:shadow-none flex items-center w-full shadow-md rounded-lg shadow-gray-200/50 mb-6"
     >
       <button
         @click="currentTab = tab"

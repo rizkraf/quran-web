@@ -13,7 +13,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="box-border w-full bg-white p-4 shadow-md rounded-lg shadow-gray-200/50"
+    class="box-border w-full bg-white dark:bg-[#05291d] dark:shadow-none p-4 shadow-md rounded-lg shadow-gray-200/50"
     v-for="(verse, index) in props.surahs.verses"
     :key="index"
     :id="`tafsir-${index + 1}`"
@@ -48,7 +48,7 @@ const props = defineProps({
       </svg>
       <div class="basis-10/12 sm:basis-11/12 flex items-center gap-4">
         <p
-          class="text-lg text-slate-900 transition duration-300"
+          class="text-lg text-slate-900 dark:text-white transition duration-300"
           :style="{ opacity: opacity }"
         >
           {{ verse.tafsir.id.short }}

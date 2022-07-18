@@ -65,7 +65,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="box-border w-full bg-white p-4 shadow-md rounded-lg shadow-gray-200/50"
+    class="box-border w-full bg-white dark:bg-[#05291d] dark:shadow-none p-4 shadow-md rounded-lg shadow-gray-200/50"
     v-for="(verse, index) in props.surahs.verses"
     :key="index"
     :id="`verse-${index + 1}`"
@@ -188,13 +188,13 @@ onMounted(() => {
       </div>
     </div>
     <h3
-      class="font-arabic text-2xl leading-[2.5] text-slate-900 text-right mb-5 transition duration-300"
+      class="font-arabic text-2xl leading-[2.5] text-slate-900 dark:text-white text-right mb-5 transition duration-300"
       :style="{ opacity: opacity }"
     >
       {{ verse.text.arab }}
     </h3>
     <p
-      class="text-lg text-slate-900 transition duration-300"
+      class="text-lg text-slate-900 dark:text-white transition duration-300"
       :style="{ opacity: opacity }"
     >
       {{ verse.translation.id }}

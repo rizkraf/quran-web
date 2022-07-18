@@ -14,7 +14,7 @@ const props = defineProps({
 <template>
   <RouterLink
     :to="{ name: 'surah', params: { id: surah.number } }"
-    class="box-border w-full bg-white p-4 flex gap-3 items-center shadow-md rounded-lg shadow-gray-200/50"
+    class="box-border w-full bg-white dark:bg-[#05291d] p-4 flex gap-3 items-center shadow-md rounded-lg shadow-gray-200/50 dark:shadow-none"
     v-for="surah in props.surahs"
     :key="surah.number"
   >
@@ -43,7 +43,7 @@ const props = defineProps({
     </svg>
     <div>
       <h3
-        class="font-semibold text-emerald-800 mb-0.5 transition duration-[500ms]"
+        class="font-semibold text-emerald-800 dark:text-white mb-0.5 transition duration-[500ms]"
         :style="{ opacity: opacity }"
       >
         {{ surah.name.transliteration.id }}
