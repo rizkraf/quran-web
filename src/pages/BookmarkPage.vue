@@ -234,7 +234,7 @@ onMounted(() => {
               </svg>
             </button>
             <RouterLink
-              :to="{ name: 'surah', params: { id: bookmark.number } }"
+              :to="{ name: 'surah', params: { id: bookmark.data.number } }"
             >
               <svg
                 class="text-emerald-600 h-7 w-7"
