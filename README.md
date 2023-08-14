@@ -4,7 +4,7 @@
 
 <h2>🚀 Demo</h2>
 
-[https://alquran-web-app.vercel.app/](https://alquran-web-app.vercel.app/)
+[https://quran.rizkyrafi.dev/](https://quran.rizkyrafi.dev/)
 
 <h2>Project Screenshots:</h2>
 
@@ -29,6 +29,7 @@ Technologies used in the project:
 
 *   [Vue.js 3](https://vuejs.org/)
 *   [Tailwind CSS 3](https://tailwindcss.com/)
+*   [TypeScript](https://www.typescriptlang.org/)
 *   [Vite](https://vitejs.dev/)
 *   [Axios](https://axios-http.com/)
 *   [Quran API](https://github.com/gadingnst/quran-api)
