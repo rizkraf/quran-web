@@ -1,16 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import axios from "axios";
-import { onMounted, ref, computed, reactive } from "vue";
+import { onMounted, ref, computed, reactive, type Ref } from "vue";
 import { useHead } from "@vueuse/head";
 import { useDark, useToggle } from "@vueuse/core";
+import { type Surahs } from "../globals";
 import SurahListsCard from "../components/SurahListsCard.vue";
 import SurahListsSkeleton from "../components/SurahListsSkeleton.vue";
 
-const surahs = ref([]);
-const search = ref("");
-const loading = ref(true);
-const lastRead = ref(localStorage.getItem("lastReadSurah") || "");
-const opacity = ref(0);
+const surahs: Ref<Array<Surahs>> = ref([]);
+const search: Ref<string> = ref("");
+const loading: Ref<boolean> = ref(true);
+const lastRead: Ref<string> = ref(localStorage.getItem("lastReadSurah") || "");
+const opacity: Ref<number> = ref(0);
 const siteHead = reactive({
   title: "Beranda - Quran Web",
   author: "Rizky Rafi Azhara",
@@ -48,7 +49,7 @@ const fetchSurah = async () => {
 
 const searchedSurah = computed(() => {
   return surahs.value.filter((surah) => {
-    return surah.name.transliteration.id
+    return surah.name?.transliteration?.id
       .toLowerCase()
       .includes(search.value.toLowerCase());
   });
@@ -151,8 +152,8 @@ onMounted(() => {
         class="font-semibold inline-block transition duration-[500ms]"
         :style="{ opacity: opacity }"
         >{{
-          surahs[lastRead - 1]
-            ? surahs[lastRead - 1].name.transliteration.id
+          surahs[Number(lastRead) - 1]
+            ? surahs[Number(lastRead) - 1].name?.transliteration.id
             : "Belum Membaca"
         }}
         <span

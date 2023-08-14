@@ -34,7 +34,7 @@ const router = createRouter({
 
 router.afterEach((to) => {
   if (to.name === "surah") {
-    localStorage.setItem("lastReadSurah", to.params.id);
+    localStorage.setItem("lastReadSurah", to.params.id.toString());
   } else {
     window.scrollTo(0, 0);
   }

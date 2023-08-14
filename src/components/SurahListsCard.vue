@@ -1,7 +1,9 @@
-<script setup>
+<script setup lang="ts">
+import { type Surahs } from "../globals";
+
 const props = defineProps({
   surahs: {
-    type: Array,
+    type: Array<Surahs>,
     required: true,
   },
   opacity: {
@@ -46,13 +48,13 @@ const props = defineProps({
         class="font-semibold text-emerald-800 dark:text-white mb-0.5 transition duration-[500ms]"
         :style="{ opacity: opacity }"
       >
-        {{ surah.name.transliteration.id }}
+        {{ surah.name?.transliteration?.id }}
       </h3>
       <p
         class="text-gray-400 text-sm transition duration-[500ms]"
         :style="{ opacity: opacity }"
       >
-        {{ surah.revelation.id }},
+        {{ surah.revelation?.id }},
         <span>{{ surah.numberOfVerses }} ayat</span>
       </p>
     </div>
@@ -61,7 +63,7 @@ const props = defineProps({
         class="font-arabic text-2xl text-emerald-600 transition duration-[500ms]"
         :style="{ opacity: opacity }"
       >
-        {{ surah.name.short }}
+        {{ surah.name?.short }}
       </p>
     </div>
   </RouterLink>

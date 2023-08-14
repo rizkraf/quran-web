@@ -1,15 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import axios from "axios";
-import { ref, reactive, computed, onMounted, shallowRef } from "vue";
+import { ref, reactive, computed, onMounted, shallowRef, type Ref } from "vue";
 import { useRoute } from "vue-router";
 import { useHead } from "@vueuse/head";
 import { useDark } from "@vueuse/core";
+import { type Surahs } from "../globals";
 import VersesListCard from "../components/VersesListCard.vue";
 import TafsirListCard from "../components/TafsirListCard.vue";
 import VersesListSkeleton from "../components/VersesListSkeleton.vue";
 
 const route = useRoute();
-const surahs = ref([]);
+const surahs: Ref<Surahs> = ref({
+  verses: [],
+});
 const loading = ref(true);
 const opacity = ref(0);
 const siteHead = reactive({
@@ -44,7 +47,7 @@ const fetchSurah = async () => {
       let { data } = response.data;
       surahs.value = data;
       loading.value = false;
-      siteHead.title = `${surahs.value.name.transliteration.id} - Quran Web`;
+      siteHead.title = `${surahs.value.name} - Quran Web`;
     }, 1000);
   } catch (error) {
     console.log(error);
@@ -90,7 +93,7 @@ onMounted(() => {
       class="text-xl font-bold text-emerald-700 transition duration-[500ms]"
       :style="{ opacity: opacity }"
     >
-      {{ surahs.name.transliteration.id }}
+      {{ surahs.name?.transliteration?.id }}
     </h1>
   </header>
   <main>
@@ -106,7 +109,7 @@ onMounted(() => {
         class="text-2xl font-semibold mb-1 transition duration-[500ms]"
         :style="{ opacity: opacity }"
       >
-        {{ surahs.name.transliteration.id }}
+        {{ surahs.name?.transliteration?.id }}
       </h2>
       <div
         v-if="loading"
@@ -117,7 +120,7 @@ onMounted(() => {
         class="text-sm mb-2 transition duration-[500ms]"
         :style="{ opacity: opacity }"
       >
-        {{ surahs.name.translation.id }}
+        {{ surahs.name?.translation?.id }}
       </p>
       <hr class="mb-2" />
       <div
@@ -138,7 +141,7 @@ onMounted(() => {
       <button
         @click="currentTab = tab"
         v-for="tab in tabs"
-        :key="tab"
+        :key="tab.key"
         class="inline-block rounded-lg basis-1/2 py-2.5"
         :class="{
           'bg-gradient-to-br from-green-800 to-emerald-600 text-white':

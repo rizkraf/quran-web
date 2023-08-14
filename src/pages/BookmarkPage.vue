@@ -1,11 +1,12 @@
-<script setup>
-import { ref, reactive, computed, onMounted } from "vue";
+<script setup lang="ts">
+import { ref, reactive, computed, onMounted, type Ref } from "vue";
 import { useHead } from "@vueuse/head";
+import { type Bookmark, type Surahs } from "../globals";
 
-const bookmarks = ref([]);
-const audioPlayer = ref(null);
-const isPlayed = ref(null);
-const isPlaying = ref(false);
+const bookmarks: Ref<Array<Bookmark>> = ref([]);
+const audioPlayer: Ref<any> = ref(null);
+const isPlayed: Ref<number | null> = ref(null);
+const isPlaying: Ref<boolean> = ref(false);
 const siteHead = reactive({
   title: "Bookmark - Quran Web",
   author: "Rizky Rafi Azhara",
@@ -26,7 +27,7 @@ useHead({
   ],
 });
 
-const addRemoveBookmark = (data, number, index) => {
+const addRemoveBookmark = (data: Surahs, number: number, index: string) => {
   if (
     bookmarks.value.find(
       (bookmark) => bookmark.number === number && bookmark.index === index
@@ -49,7 +50,7 @@ const saveToLocalStorage = () => {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks.value));
 };
 
-const playAudio = (index) => {
+const playAudio = (index: number) => {
   audioPlayer.value[index].addEventListener("ended", () => {
     isPlayed.value = null;
     isPlaying.value = false;
@@ -60,7 +61,7 @@ const playAudio = (index) => {
   isPlaying.value = true;
 };
 
-const pauseAudio = (index) => {
+const pauseAudio = (index: number) => {
   audioPlayer.value[index].pause();
   isPlayed.value = null;
   isPlaying.value = false;
@@ -142,7 +143,7 @@ onMounted(() => {
               </text>
             </svg>
             <p class="font-semibold text-emerald-600">
-              {{ bookmark.data.name.transliteration.id }}
+              {{ bookmark.data.name?.transliteration.id }}
             </p>
           </div>
 
@@ -193,7 +194,7 @@ onMounted(() => {
                 addRemoveBookmark(
                   bookmark.data,
                   bookmark.number,
-                  `${bookmark.data.name.transliteration.id}-${bookmark.number}`
+                  `${bookmark.data?.name?.transliteration.id}-${bookmark.number}`
                 )
               "
             >
@@ -203,7 +204,7 @@ onMounted(() => {
                     (bookmark) =>
                       bookmark.number === bookmark.number &&
                       bookmark.index ===
-                        `${bookmark.data.name.transliteration.id}-${bookmark.number}`
+                        `${bookmark.data?.name?.transliteration.id}-${bookmark.number}`
                   )
                 "
                 class="text-emerald-600 h-7 w-7"

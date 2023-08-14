@@ -1,5 +1,6 @@
-<script setup>
-import { ref, onMounted } from "vue";
+<script setup lang="ts">
+import { ref, onMounted, type Ref } from "vue";
+import { type Bookmark } from "../globals";
 
 const props = defineProps({
   surahs: {
@@ -12,19 +13,21 @@ const props = defineProps({
   },
 });
 
-const bookmarks = ref([]);
-const audioPlayer = ref(null);
-const isPlayed = ref(null);
-const isPlaying = ref(false);
+const bookmarks: Ref<Array<Bookmark>> = ref([]);
+const audioPlayer: Ref<any> = ref(null);
+const isPlayed: Ref<number | null> = ref(null);
+const isPlaying: Ref<boolean> = ref(false);
 
-const addRemoveBookmark = (data, number, index) => {
+const addRemoveBookmark = (data: any, number: number, index: string) => {
   if (
     bookmarks.value.find(
-      (bookmark) => bookmark.number === number && bookmark.index === index
+      (bookmark: Bookmark) =>
+        bookmark.number === number && bookmark.index === index
     )
   ) {
     bookmarks.value = bookmarks.value.filter(
-      (bookmark) => bookmark.number !== number || bookmark.index !== index
+      (bookmark: Bookmark) =>
+        bookmark.number !== number || bookmark.index !== index
     );
   } else {
     bookmarks.value.push({
@@ -40,7 +43,7 @@ const saveToLocalStorage = () => {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks.value));
 };
 
-const playAudio = (index) => {
+const playAudio = (index: number) => {
   audioPlayer.value[index].addEventListener("ended", () => {
     isPlayed.value = null;
     isPlaying.value = false;
@@ -51,7 +54,7 @@ const playAudio = (index) => {
   isPlaying.value = true;
 };
 
-const pauseAudio = (index) => {
+const pauseAudio = (index: number) => {
   audioPlayer.value[index].pause();
   isPlayed.value = null;
   isPlaying.value = false;
